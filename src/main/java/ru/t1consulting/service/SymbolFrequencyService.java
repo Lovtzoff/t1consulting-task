@@ -22,7 +22,10 @@ public class SymbolFrequencyService {
 
         return frequencyMap.entrySet().stream()
                 // преобразуем Map.Entry в SymbolFrequency
-                .map(entry -> new SymbolFrequency(entry.getKey(), entry.getValue()))
+                .map(entry -> SymbolFrequency.builder()
+                        .symbol(entry.getKey())
+                        .frequency(entry.getValue())
+                        .build())
                 // сортируем по частоте в обратном порядке
                 .sorted(Comparator.comparingInt(SymbolFrequency::getFrequency).reversed())
                 .collect(Collectors.toList());
